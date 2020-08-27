@@ -25,3 +25,5 @@ def handler(event, context):
         output.append(output_record)
 
     print('Successfully processed {} records.'.format(len(event['records'])))
+
+    return { 'records': output }
