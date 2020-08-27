@@ -6,14 +6,9 @@ import uuid
 
 # Set a stream name for later
 stream_name = 'sales'
-# Create the Kinesis client 
+# Create the Kinesis client
 kinesis = boto3.client('kinesis', region_name='us-east-1')
 
-# Create the Stream
-kinesis.create_stream(
-    StreamName=stream_name,
-    ShardCount=1
-)
 
 def put_to_stream():
     record = {
@@ -21,11 +16,11 @@ def put_to_stream():
         'timestamp': str(int(time.time())),
         'product_sold': random.choice(
             [
-                'socks', 
+                'socks',
                 'jacket',
                 'sweatpants',
                 'scarf',
-                'shirt', 
+                'shirt',
                 'pajamas',
                 'jeans',
                 'raincoat',
@@ -38,6 +33,7 @@ def put_to_stream():
         Data=json.dumps(record),
         PartitionKey='a-partition'
     )
+
 
 # Check that the stream is created before running this
 while True:
